@@ -1,0 +1,36 @@
+int pop(vector<int> &arr)
+{
+    if(arr.empty())
+    return -1;
+
+    int size=arr.size()-1;
+    int ans=arr[0];
+    arr[0]=arr[size];
+    arr.pop_back();
+    int size1=arr.size()-1;
+    int index=0;
+
+    while(index<=size1)
+    {
+        int left=2*index+1;
+        int right=2*index+2;
+        int largestIndex=index;
+
+        if(left<=size1 && arr[largestIndex]<arr[left])
+        largestIndex=left;
+
+        if(right<=size1 && arr[largestIndex]<arr[right])
+        largestIndex=right;
+
+        if(index==largestIndex)
+        {
+          return ans;
+        }
+        if(largestIndex!=index){
+            swap(arr[index],arr[largestIndex]);
+            index=largestIndex;
+        }
+    }
+
+    return ans;
+}
